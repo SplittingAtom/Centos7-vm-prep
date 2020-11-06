@@ -8,10 +8,12 @@ hostnamectl set-hostname <Add Fully Qualified Domain Name here> #USE FQDN
 realm join --user=<Add AD user with rights to join VM to AD> --computer-ou=OU=<Add the OU where the VM will reside.  ex- LabServers> <Add AD Domain Name>
 ```   
 
-
+Test adcli
 ```
-authselect select sssd
 adcli info <enter your domain here>
+```
+Set SSSD for auth
+```
 authconfig --enablesssd --enablesssdauth --update
 ```
 Make the change below in sssd
@@ -20,15 +22,20 @@ vi /etc/sssd/sssd.conf
 ```
 Change use_fully_qualified_names = False
 
+
+Check kerberos
 ```
 klist -kt
+```
+Enable SSSD service
+```
 systemctl start sssd
 systemctl is-active sssd
 systemctl enable sssd
 ```
 
 
-
+Check to see if id from AD exists
 ```
 id <Add a Username to test>
 ```
@@ -43,7 +50,7 @@ Add Sudo access to the LinuxUsers group in Windows AD (I created this and added 
 ``` 
 visudo
 ```
-and add the line
+and add the line under %wheel  ALL=(ALL)       ALL
 ```
 %<AD Group>@<AD Domain> ALL=(ALL)  ALL
 ```
