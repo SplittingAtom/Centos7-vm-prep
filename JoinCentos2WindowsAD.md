@@ -40,7 +40,8 @@ realm permit -g <AD Group>@<AD Domain>
 ```
 
 Add Sudo access to the LinuxUsers group in Windows AD (I created this and added all my users who will login to Linux VMs)
-``` visudo
+``` 
+visudo
 ```
 and add the line
 ```
