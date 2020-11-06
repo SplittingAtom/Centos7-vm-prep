@@ -11,7 +11,7 @@ realm join --user=<Add AD user with rights to join VM to AD> --computer-ou=OU=<A
 
 ```
 authselect select sssd
-adcli info atom.splittingatom.com
+adcli info <enter your domain here>
 authconfig --enablesssd --enablesssdauth --update
 ```
 Make the change below in sssd
